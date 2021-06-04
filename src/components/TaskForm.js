@@ -14,6 +14,13 @@ export default class TaskForm extends Component {
 
   addTask() {
     // TODO: name to parent through props
+    this.props.createTask(this.state.name);
+  }
+
+  inputHandler = (event) => {
+    this.setState({
+      name: event.target.value
+    });
   }
 
   render() {
@@ -22,8 +29,8 @@ export default class TaskForm extends Component {
         <form>
           
           <div className="input-group mb-3">
-            <input type="text" className="form-control" placeholder="Task" />
-            <button className="btn btn-outline-secondary" type="submit">
+            <input onChange={this.inputHandler} type="text" className="form-control" placeholder="Task" />
+            <button onClick={() => this.addTask()} className="btn btn-outline-secondary" type="submit">
               +
             </button>
           </div>

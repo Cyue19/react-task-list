@@ -2,6 +2,10 @@ import React, { Component } from 'react'
 
 export default class TaskTable extends Component {
 
+  constructor(props) {
+    super(props);
+  }
+
   render() {
 
     // TODO: read tasks from props here and add them to the html
@@ -19,7 +23,7 @@ export default class TaskTable extends Component {
             </tr>
           </thead>
           <tbody>
-
+          {this.props.tasks.map(task => <tr><td>{task.name}</td></tr>)}
           </tbody>
         </table>
       </div>

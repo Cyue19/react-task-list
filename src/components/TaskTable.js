@@ -6,10 +6,23 @@ export default class TaskTable extends Component {
     super(props);
   }
 
-  render() {
+  completeTask(task) {
+    task.completed = !task.completed;
+    if (task.completed) {
+      const currDate = new Date();
+      task.dateCompleted = (currDate.getMonth()+1) + "/" + currDate.getDate() + "/" + currDate.getFullYear();
+    } else {
+      task.dateCompleted = null;
+    }
 
-    // TODO: read tasks from props here and add them to the html
-    // NOTE. don't worry about edit and delete for homework
+    this.props.updateTask(task);
+  }
+
+  removeTask(task) {
+    this.props.removeTask(task);
+  }
+
+  render() {
 
     return (
       <div>
@@ -23,7 +36,18 @@ export default class TaskTable extends Component {
             </tr>
           </thead>
           <tbody>
-          {this.props.tasks.map(task => <tr><td>{task.name}</td></tr>)}
+          {
+            this.props.tasks.map(task => 
+            <tr key={task.id}>
+              <td>{task.name}</td>
+              <td onClick={() => this.completeTask(task)}>{task.completed ? 
+                <i className="bi bi-circle-fill"></i> : 
+                <i className="bi bi-circle"></i>}
+              </td>
+              <td>{task.dateCompleted}</td>
+              <td onClick={() => this.removeTask(task)}><i className="bi bi-trash"></i></td>
+            </tr>
+          )}
           </tbody>
         </table>
       </div>

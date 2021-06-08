@@ -12,25 +12,29 @@ export default class TaskForm extends Component {
     };
   }
 
-  addTask() {
-    // TODO: name to parent through props
+  addTask(e) {
+    e.preventDefault(); //prevent page reload each time we submit
     this.props.createTask(this.state.name);
+
+    this.setState({
+      name: ""
+    })
   }
 
-  inputHandler = (event) => {
+  onNameChanged(e) {
     this.setState({
-      name: event.target.value
+      name: e.target.value
     });
   }
 
   render() {
     return (
       <div className="task-form">
-        <form>
+        <form onSubmit={(e) => this.addTask(e)}>
           
           <div className="input-group mb-3">
-            <input onChange={this.inputHandler} type="text" className="form-control" placeholder="Task" />
-            <button onClick={() => this.addTask()} className="btn btn-outline-secondary" type="submit">
+            <input onChange={(e)=>this.onNameChanged(e)} value={this.state.name} type="text" className="form-control" placeholder="Task" />
+            <button className="btn btn-outline-secondary" type="submit">
               +
             </button>
           </div>

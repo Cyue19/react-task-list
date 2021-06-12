@@ -8,23 +8,33 @@ export default class TaskForm extends Component {
     super(props);
 
     this.state = {
-      name: ''
+      title: '',
+      description: "",
     };
   }
 
   addTask(e) {
     e.preventDefault(); //prevent page reload each time we submit
-    this.props.createTask(this.state.name);
+    this.props.createTask(this.state.title, this.state.description);
 
     this.setState({
-      name: ""
+      title: "",
+      description: ""
     })
   }
 
-  onNameChanged(e) {
+  onTitleChanged(e) {
+    e.preventDefault();
     this.setState({
-      name: e.target.value
+      title: e.target.value
     });
+  }
+
+  onDescriptionChanged(e) {
+    e.preventDefault();
+    this.setState({
+      description: e.target.value
+    })
   }
 
   render() {
@@ -33,7 +43,8 @@ export default class TaskForm extends Component {
         <form onSubmit={(e) => this.addTask(e)}>
           
           <div className="input-group mb-3">
-            <input onChange={(e)=>this.onNameChanged(e)} value={this.state.name} type="text" className="form-control" placeholder="Task" />
+            <input onChange={(e)=>this.onTitleChanged(e)} value={this.state.title} type="text" className="form-control" placeholder="Title" />
+            <input onChange={(e)=>this.onDescriptionChanged(e)} value={this.state.description} type="text" className="form-control" placeholder="Description" />
             <button className="btn btn-outline-secondary" type="submit">
               +
             </button>

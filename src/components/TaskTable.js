@@ -29,7 +29,8 @@ export default class TaskTable extends Component {
         <table className="table">
           <thead>
             <tr>
-              <th>Task</th>
+              <th>Title</th>
+              <th>Description</th>
               <th>Completed</th>
               <th>Completed On</th>
               <th></th>
@@ -39,7 +40,8 @@ export default class TaskTable extends Component {
           {
             this.props.tasks.map(task => 
             <tr key={task.id}>
-              <td>{task.name}</td>
+              <td>{task.title}</td>
+              <td>{task.description}</td>
               <td onClick={() => this.completeTask(task)}>{task.completed ? 
                 <i className="bi bi-circle-fill"></i> : 
                 <i className="bi bi-circle"></i>}

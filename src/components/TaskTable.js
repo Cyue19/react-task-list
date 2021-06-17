@@ -2,10 +2,6 @@ import React, { Component } from 'react'
 
 export default class TaskTable extends Component {
 
-  constructor(props) {
-    super(props);
-  }
-
   completeTask(task) {
     task.completed = !task.completed;
     if (task.completed) {
